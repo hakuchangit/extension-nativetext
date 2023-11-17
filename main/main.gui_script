@@ -1,0 +1,76 @@
+function init(self)
+	nativetext.init{
+		max_texture_width = 2048,
+		max_texture_height = 2048
+	}
+
+	local image_resource = nativetext.new{
+		text = 'शार्क',
+		width = 100, -- Not required.
+		size = 30,
+		underline = true,
+		spacing_add = 50,
+		--spacing_mult = 3, -- Doesn't work on OSX.
+		align = nativetext.align_center,
+		color = vmath.vector4(0, 1, 1, 1),
+		outline_size = 8,
+		outline_color = vmath.vector4(0.9, 0.1, 0.1, 1),
+		shadow_size = 8,
+		shadow_x = 8, shadow_y = -8,
+		shadow_color = vmath.vector4(0, 0, 0, 1),
+		background_color = vmath.vector4(0.1, 0.2, 0.8, 1)
+	}
+
+
+	local bytes = buffer.get_stream(image_resource.buffer, hash("pixels"))
+	local pixels = '';
+
+	for i=1, #bytes do
+		pixels = pixels..string.char(bytes[i]);
+	end
+
+	if gui.new_texture("native_text_texture", image_resource.header.width,image_resource.header.height, "rgba", pixels,true) then
+		local node = gui.get_node("node")
+		gui.set_texture(node, "native_text_texture")
+	end
+
+
+
+	
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
